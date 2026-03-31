@@ -3,7 +3,6 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Product} from '../models/product';
 import {RevealOnScroll} from '../../../shared/directives/reveal-on-scroll';
 import {CartService} from '../../../core/cart/cart-service';
-import {ModalService} from '../../../core/modal/modal-service';
 
 @Component({
   selector: 'app-product-details-page',
