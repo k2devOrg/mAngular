@@ -45,9 +45,9 @@ export class CartService {
       if (!existing) {
         const newCartItem: CartItem = {
           productId: product.id,
-          title: product.title,
+          title: product.name,
           price: product.price,
-          imgUrl: product.imgUrl,
+          imgUrl: product.imageUrl,
           quantity: 1,
         };
         return [...items, newCartItem];
@@ -59,9 +59,9 @@ export class CartService {
       );
     });
     this.modalService.open('ADD_TO_CART', {
-      title: product.title,
+      title: product.name,
       price: product.price,
-      imgUrl: product.imgUrl,
+      imgUrl: product.imageUrl,
       quantity: 1,
     })
   }

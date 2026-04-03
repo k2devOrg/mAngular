@@ -1,119 +1,103 @@
 <section appRevealOnScroll class="reveal-section bg-white py-6">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+@if (isLoading()) {
+<div class="mx-auto max-w-xl py-16 text-center">
+<p class="text-sm text-gray-600">Ładowanie produktu...</p>
+</div>
+} @else if (product()) {
+<nav aria-label="Breadcrumb" class="flex pb-6">
+<ol role="list" class="flex items-center space-x-4">
+<li>
+<div>
+<a routerLink="/shop" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Sklep</a>
+</div>
+</li>
+<li>
+<div class="flex items-center">
+<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-gray-400">
+<path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+</svg>
+<p class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ product()!.categoryName }}</p>
+</div>
+</li>
+<li>
+<div class="flex items-center">
+<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-gray-400">
+<path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+</svg>
+<p aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ product()!.name }}</p>
+</div>
+</li>
+</ol>
+</nav>
 
-    @if (product) {
-    <nav aria-label="Breadcrumb" class="flex pb-6">
-      <ol role="list" class="flex items-center space-x-4">
-        <li>
-          <div>
-            <a routerLink="/shop" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Sklep</a>
-          </div>
-        </li>
-        <li>
-          <div class="flex items-center">
-            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 shrink-0 text-gray-400">
-              <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-            </svg>
-            <p class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ product.category }}</p>
-          </div>
-        </li>
-        <li>
-          <div class="flex items-center">
-            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 shrink-0 text-gray-400">
-              <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-            </svg>
-            <p aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ product.title }}</p>
-          </div>
-        </li>
-      </ol>
-    </nav>
+<div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
+<div class="w-full">
+<div class="aspect-square overflow-hidden rounded-lg bg-gray-100">
+<img
+[src]="productImages[activeImageIndex()]"
+[alt]="product()!.name"
+class="h-full w-full object-cover"
+/>
+</div>
 
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
+<div class="mt-4 grid grid-cols-4 gap-3">
+@for (img of productImages; track $index) {
+<button
+  type="button"
+  (click)="setActiveImage($index)"
+  class="relative aspect-square overflow-hidden rounded-md border transition hover:opacity-80"
+  [class.border-black]="activeImageIndex() === $index"
+  [class.border-gray-200]="activeImageIndex() !== $index"
+>
+  <img [src]="img" alt="" class="h-full w-full object-cover" />
+</button>
+}
+</div>
+</div>
 
-          <!-- LEFT: IMAGE -->
-          <div class="w-full">
-            <div class="aspect-square overflow-hidden rounded-lg bg-gray-100">
-              <img
-                [src]="product.images[activeImageIndex()]"
-                [alt]="product.title"
-                class="h-full w-full object-cover"
-              />
-            </div>
-            <div class="mt-4 grid grid-cols-4 gap-3">
-              @for (img of product.images; track $index) {
-                <button
-                  type="button"
-                  (click)="setActiveImage($index)"
-                  class="relative aspect-square overflow-hidden rounded-md border
-                        transition
-                        hover:opacity-80"
-                  [class.border-black]="activeImageIndex() === $index"
-                  [class.border-gray-200]="activeImageIndex() !== $index"
-                >
-                  <img
-                    [src]="img"
-                    alt=""
-                    class="h-full w-full object-cover"
-                  />
-                </button>
-                }
-                </div>
-              </div>
+<div class="flex flex-col">
+<h1 class="text-3xl font-semibold tracking-tight text-gray-900">
+{{ product()!.name }}
+</h1>
 
-              <!-- RIGHT: PRODUCT INFO -->
-              <div class="flex flex-col">
+<p class="mt-2 text-sm text-gray-500">
+{{ product()!.categoryName }}
+</p>
 
-                <!-- Title -->
-                <h1 class="text-3xl font-semibold tracking-tight text-gray-900">
-    {{ product.title }}
-    </h1>
+<div class="mt-6">
+<p class="text-3xl font-medium text-gray-900">
+{{ product()!.price }} {{ product()!.currency }}
+</p>
+</div>
 
-    <!-- Subtitle -->
-    <p class="mt-2 text-sm text-gray-500">
-    {{ product.subTitle }}
-    </p>
+<div class="mt-6 text-sm leading-relaxed text-gray-700">
+<p>{{ product()!.description }}</p>
+</div>
 
-    <!-- Price -->
-    <div class="mt-6">
-      <p class="text-3xl font-medium text-gray-900">
-    {{ product.price }} zł
-            </p>
-          </div>
+<div class="mt-4 text-sm text-gray-600">
+Stan magazynowy: {{ product()!.stockQuantity }}
+</div>
 
-          <!-- Description (placeholder) -->
-          <div class="mt-6 text-sm text-gray-700 leading-relaxed">
-            <p>
-              To jest przykładowy opis produktu. W przyszłości będzie
-              pochodził z backendu.
-            </p>
-          </div>
-
-          <!-- CTA -->
-          <div class="mt-10">
-            <button
-              (click)="cartService.add(product)"
-              class="w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white hover:bg-gray-900 transition"
-            >
-              Dodaj do koszyka
-            </button>
-          </div>
-        </div>
-      </div>
-
-    } @else {
-
-    <!-- PRODUCT NOT FOUND -->
-    <div class="mx-auto max-w-xl text-center">
-      <h2 class="text-2xl font-medium text-gray-900">
-        Produkt nie został znaleziony
-      </h2>
-      <p class="mt-4 text-sm text-gray-600">
-        Produkt o ID <strong>{{ productIdUrl }}</strong> nie istnieje
-          lub został usunięty.
-        </p>
-      </div>
-
-    }
-
+<div class="mt-10">
+<button
+(click)="cartService.add(product()!)"
+class="w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white transition hover:bg-gray-900"
+>
+Dodaj do koszyka
+</button>
+</div>
+</div>
+</div>
+} @else if (notFound()) {
+<div class="mx-auto max-w-xl text-center">
+<h2 class="text-2xl font-medium text-gray-900">
+Produkt nie został znaleziony
+</h2>
+<p class="mt-4 text-sm text-gray-600">
+Produkt o slug <strong>{{ productSlug() }}</strong> nie istnieje lub został usunięty.
+</p>
+</div>
+}
   </div>
 </section>

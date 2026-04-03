@@ -14,7 +14,7 @@ export const shopRoutes: Routes = [
         .then(m => m.CartPageComponent),
   },
   {
-    path: 'product/:id',
+    path: 'product/:slug',
     loadComponent: () =>
       import('./product-details-page/product-details-page')
         .then(m => m.ProductDetailsPageComponent),

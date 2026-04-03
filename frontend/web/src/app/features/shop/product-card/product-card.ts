@@ -11,9 +11,9 @@ import {Product} from '../models/product';
 export class ProductCardComponent {
 
   product = input.required<Product>();
-  clicked = output<number | string>()
+  clicked = output<string>();
 
   cardClicked() {
-    this.clicked.emit(this.product().id);
+    this.clicked.emit(this.product().slug);
   }
 }

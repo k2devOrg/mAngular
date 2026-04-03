@@ -1,9 +1,13 @@
 export interface Product {
-  id: number,
-  imgUrl: string,
-  title: string,
-  category: string,
-  subTitle: string,
-  price: number,
-  images: string[]
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  currency: string;
+  stockQuantity: number;
+  active: boolean;
+  categoryName: string;
+  categorySlug: string;
+  imageUrl: string;
 }
