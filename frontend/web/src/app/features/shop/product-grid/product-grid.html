@@ -1,16 +1,64 @@
-<section class="">
-
+<section>
   <div class="bg-white">
     <div class="mx-auto max-w-screen-xl overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
-        @for(productCard of productList; track productCard.id) {
+        @for (productCard of productList; track productCard.id) {
         <app-product-card
-        [product]=productCard
-        (clicked)="onProductClicked($event)">
+          [product]="productCard"
+          (clicked)="onProductClicked($event)">
         </app-product-card>
         }
       </div>
+
+      @if (totalPages() > 1) {
+      <section class="py-16">
+        <nav class="flex items-center justify-between border-t border-gray-200 px-4">
+          <div class="-mt-px flex w-0 flex-1">
+            <button
+              type="button"
+              (click)="goToPreviousPage()"
+              [disabled]="currentPage() === 0"
+              class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="mr-3 size-5 text-gray-400">
+                <path d="M18 10a.75.75 0 0 1-.75.75H4.66l2.1 1.95a.75.75 0 1 1-1.02 1.1l-3.5-3.25a.75.75 0 0 1 0-1.1l3.5-3.25a.75.75 0 1 1 1.02 1.1l-2.1 1.95h12.59A.75.75 0 0 1 18 10Z" clip-rule="evenodd" fill-rule="evenodd" />
+              </svg>
+              Poprzednia strona
+            </button>
+          </div>
+
+          <div class="hidden md:-mt-px md:flex">
+            @for (page of pages(); track page) {
+      <button
+        type="button"
+        (click)="goToPage(page)"
+        class="inline-flex items-center border-t-2 px-4 pt-4 text-sm font-medium"
+        [class.border-gray-500]="currentPage() === page"
+        [class.text-gray-700]="currentPage() === page"
+        [class.border-transparent]="currentPage() !== page"
+        [class.text-gray-500]="currentPage() !== page"
+      >
+        {{ page + 1 }}
+      </button>
+      }
+      </div>
+
+      <div class="-mt-px flex w-0 flex-1 justify-end">
+        <button
+          type="button"
+          (click)="goToNextPage()"
+          [disabled]="currentPage() === totalPages() - 1"
+          class="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          Następna strona
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="ml-3 size-5 text-gray-400">
+            <path d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </section>
+      }
     </div>
   </div>
-
 </section>

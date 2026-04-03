@@ -2,17 +2,17 @@
   <!-- Mobile filter dialog -->
   <div>
     <dialog id="mobile-filters" class="overflow-hidden backdrop:bg-transparent sm:hidden">
-      <div class="fixed inset-0 bg-black/25 transition-opacity duration-300 ease-linear data-closed:opacity-0"></div>
+      <div class="fixed inset-0 bg-black/25"></div>
 
       <div tabindex="0" class="fixed inset-0 flex focus:outline-none">
-        <div class="relative ml-auto flex size-full max-w-xs transform flex-col overflow-y-auto bg-white pt-4 pb-6 shadow-xl transition duration-300 ease-in-out data-closed:translate-x-full">
-          <div class="flex items-center justify-between px-4 mr-4">
+        <div class="relative ml-auto flex size-full max-w-xs flex-col overflow-y-auto bg-white pt-4 pb-6 shadow-xl">
+          <div class="mr-4 flex items-center justify-between px-4">
             <h2 class="text-lg font-medium text-gray-900">Filtry</h2>
             <button
               type="button"
               command="close"
               commandfor="mobile-filters"
-              class="relative -mr-2 flex size-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
+              class="relative -mr-2 flex size-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50"
             >
               <span class="sr-only">Zamknij filtry</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-6">
@@ -22,116 +22,107 @@
           </div>
 
           <form class="mt-4 mr-4">
-            <!-- Category -->
             <div class="border-t border-gray-200 px-4 py-6">
-              <h3 class="-mx-2 -my-3 flow-root">
-                <button
-                  type="button"
-                  command="--toggle"
-                  commandfor="filter-section-category"
-                  class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400"
-                >
-                  <span class="font-medium text-gray-900">Gra / Kategoria</span>
-                  <span class="ml-6 flex items-center">
-                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 transform not-in-aria-expanded:rotate-0 in-aria-expanded:-rotate-180">
-                      <path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
+              <h3 class="text-sm font-medium text-gray-900">Gra / Kategoria</h3>
 
-              <div id="filter-section-category" hidden class="block pt-6">
-                <div class="space-y-6">
-                  <div class="flex gap-3">
-                    <div class="flex h-5 shrink-0 items-center">
-                      <div class="group grid size-4 grid-cols-1">
-                        <input id="filter-mobile-category-0" type="radio" name="category" value="" class="col-start-1 row-start-1 appearance-none rounded-full border border-gray-300 bg-white checked:border-black checked:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" />
-                      </div>
-                    </div>
-                    <label for="filter-mobile-category-0" class="text-sm text-gray-500">Wszystkie</label>
-                  </div>
-
-                  <div class="flex gap-3">
-                    <div class="flex h-5 shrink-0 items-center">
-                      <div class="group grid size-4 grid-cols-1">
-                        <input id="filter-mobile-category-1" type="radio" name="category" value="pokemon" class="col-start-1 row-start-1 appearance-none rounded-full border border-gray-300 bg-white checked:border-black checked:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" />
-                      </div>
-                    </div>
-                    <label for="filter-mobile-category-1" class="text-sm text-gray-500">Pokémon</label>
-                  </div>
-
-                  <div class="flex gap-3">
-                    <div class="flex h-5 shrink-0 items-center">
-                      <div class="group grid size-4 grid-cols-1">
-                        <input id="filter-mobile-category-2" type="radio" name="category" value="magic-the-gathering" class="col-start-1 row-start-1 appearance-none rounded-full border border-gray-300 bg-white checked:border-black checked:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" />
-                      </div>
-                    </div>
-                    <label for="filter-mobile-category-2" class="text-sm text-gray-500">Magic: The Gathering</label>
-                  </div>
-
-                  <div class="flex gap-3">
-                    <div class="flex h-5 shrink-0 items-center">
-                      <div class="group grid size-4 grid-cols-1">
-                        <input id="filter-mobile-category-3" type="radio" name="category" value="yu-gi-oh" class="col-start-1 row-start-1 appearance-none rounded-full border border-gray-300 bg-white checked:border-black checked:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black" />
-                      </div>
-                    </div>
-                    <label for="filter-mobile-category-3" class="text-sm text-gray-500">Yu-Gi-Oh!</label>
-                  </div>
+              <div class="space-y-4 pt-4">
+                <div class="flex gap-3">
+                  <input
+                    id="filter-mobile-category-0"
+                    type="radio"
+                    name="mobile-category"
+                    [checked]="selectedCategory === ''"
+                    (change)="selectCategory('')"
+                    class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
+                  />
+                  <label for="filter-mobile-category-0" class="text-sm text-gray-500">Wszystkie</label>
                 </div>
-              </div>
-            </div>
 
-            <!-- Price -->
-            <div class="border-t border-gray-200 px-4 py-6">
-              <h3 class="-mx-2 -my-3 flow-root">
-                <button
-                  type="button"
-                  command="--toggle"
-                  commandfor="filter-section-price"
-                  class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400"
-                >
-                  <span class="font-medium text-gray-900">Cena</span>
-                  <span class="ml-6 flex items-center">
-                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 transform not-in-aria-expanded:rotate-0 in-aria-expanded:-rotate-180">
-                      <path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
+                <div class="flex gap-3">
+                  <input
+                    id="filter-mobile-category-1"
+                    type="radio"
+                    name="mobile-category"
+                    [checked]="selectedCategory === 'pokemon'"
+                    (change)="selectCategory('pokemon')"
+                    class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
+                  />
+                  <label for="filter-mobile-category-1" class="text-sm text-gray-500">Pokémon</label>
+                </div>
 
-              <div id="filter-section-price" hidden class="block pt-6">
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label for="mobile-min-price" class="block text-sm font-medium text-gray-700">Cena od</label>
-                    <input
-                      id="mobile-min-price"
-                      type="number"
-                      min="0"
-                      placeholder="0"
-                      class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
-                    />
-                  </div>
+                <div class="flex gap-3">
+                  <input
+                    id="filter-mobile-category-2"
+                    type="radio"
+                    name="mobile-category"
+                    [checked]="selectedCategory === 'magic-the-gathering'"
+                    (change)="selectCategory('magic-the-gathering')"
+                    class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
+                  />
+                  <label for="filter-mobile-category-2" class="text-sm text-gray-500">Magic: The Gathering</label>
+                </div>
 
-                  <div>
-                    <label for="mobile-max-price" class="block text-sm font-medium text-gray-700">Cena do</label>
-                    <input
-                      id="mobile-max-price"
-                      type="number"
-                      min="0"
-                      placeholder="1000"
-                      class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
-                    />
-                  </div>
+                <div class="flex gap-3">
+                  <input
+                    id="filter-mobile-category-3"
+                    type="radio"
+                    name="mobile-category"
+                    [checked]="selectedCategory === 'yu-gi-oh'"
+                    (change)="selectCategory('yu-gi-oh')"
+                    class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
+                  />
+                  <label for="filter-mobile-category-3" class="text-sm text-gray-500">Yu-Gi-Oh!</label>
                 </div>
               </div>
             </div>
 
             <div class="border-t border-gray-200 px-4 py-6">
+              <h3 class="text-sm font-medium text-gray-900">Cena</h3>
+
+              <div class="grid grid-cols-2 gap-4 pt-4">
+                <div>
+                  <label for="mobile-min-price" class="block text-sm font-medium text-gray-700">Cena od</label>
+                  <input
+                    id="mobile-min-price"
+                    type="number"
+                    min="0"
+                    placeholder="0"
+                    [(ngModel)]="minPrice"
+                    name="mobileMinPrice"
+                    class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  />
+                </div>
+
+                <div>
+                  <label for="mobile-max-price" class="block text-sm font-medium text-gray-700">Cena do</label>
+                  <input
+                    id="mobile-max-price"
+                    type="number"
+                    min="0"
+                    placeholder="1000"
+                    [(ngModel)]="maxPrice"
+                    name="mobileMaxPrice"
+                    class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-200 px-4 py-6 space-y-3">
               <button
                 type="button"
+                (click)="applyPriceFilters()"
                 class="w-full rounded-md bg-black px-4 py-3 text-sm font-medium text-white hover:bg-gray-900"
               >
                 Zastosuj filtry
+              </button>
+
+              <button
+                type="button"
+                (click)="clearFilters()"
+                class="w-full rounded-md border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
+                Wyczyść filtry
               </button>
             </div>
           </form>
@@ -140,11 +131,11 @@
     </dialog>
   </div>
 
-  <div class="mx-auto max-w-3xl text-center lg:max-w-7xl mr-4">
+  <div class="mx-auto max-w-7xl px-4 py-5 md:px-6 md:py-5">
     <section aria-labelledby="filter-heading" class="border-b py-6">
       <h2 id="filter-heading" class="sr-only">Filtry produktów</h2>
 
-      <div class="flex items-center justify-between">
+      <div class="grid grid-cols-2 items-center md:grid-cols-3">
         <!-- Sort -->
         <div class="relative inline-block text-left">
           <button
@@ -169,13 +160,11 @@
           </button>
 
           @if (sortOpen) {
-          <div
-            class="absolute left-0 z-50 mt-2 w-48 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black/5"
-          >
+          <div class="absolute left-0 z-50 mt-2 w-48 rounded-md bg-white shadow-2xl ring-1 ring-black/5">
             <div class="py-1">
               <button
                 type="button"
-                (click)="selectSort('Nazwa A-Z')"
+                (click)="selectSort('Nazwa A-Z', 'name,asc')"
                 class="block w-full px-4 py-2 text-left text-sm font-medium text-gray-900 hover:bg-gray-100"
               >
                 Nazwa A-Z
@@ -183,7 +172,7 @@
 
               <button
                 type="button"
-                (click)="selectSort('Cena rosnąco')"
+                (click)="selectSort('Cena rosnąco', 'price,asc')"
                 class="block w-full px-4 py-2 text-left text-sm font-medium text-gray-900 hover:bg-gray-100"
               >
                 Cena rosnąco
@@ -191,7 +180,7 @@
 
               <button
                 type="button"
-                (click)="selectSort('Cena malejąco')"
+                (click)="selectSort('Cena malejąco', 'price,desc')"
                 class="block w-full px-4 py-2 text-left text-sm font-medium text-gray-900 hover:bg-gray-100"
               >
                 Cena malejąco
@@ -201,6 +190,7 @@
           }
         </div>
 
+        <!-- Mobile button -->
         <button
           type="button"
           command="show-modal"
@@ -214,40 +204,37 @@
         <div class="hidden sm:flex sm:items-baseline sm:space-x-8">
           <!-- Category -->
           <div class="relative inline-block text-left">
-            <div>
-              <button
-                type="button"
-                (click)="toggleCategory()"
-                class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+            <button
+              type="button"
+              (click)="toggleCategory()"
+              class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+            >
+              <span>Gra</span>
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+                class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 transition group-hover:text-gray-500"
+                [class.rotate-180]="categoryOpen"
               >
-                <span>Gra</span>
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 transition group-hover:text-gray-500"
-                  [class.rotate-180]="categoryOpen"
-                >
-                  <path
-                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
 
             @if (categoryOpen) {
-            <div
-              class="absolute right-0 z-50 mt-2 min-w-56 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5"
-            >
+            <div class="absolute right-0 z-50 mt-2 min-w-56 rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5">
               <form class="space-y-4">
                 <div class="flex gap-3">
                   <input
                     id="filter-category-0"
                     type="radio"
                     name="desktop-category"
-                    value=""
+                    [checked]="selectedCategory === ''"
+                    (change)="selectCategory('')"
                     class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
                   />
                   <label for="filter-category-0" class="pr-6 text-sm font-medium whitespace-nowrap text-gray-900">
@@ -260,7 +247,8 @@
                     id="filter-category-1"
                     type="radio"
                     name="desktop-category"
-                    value="pokemon"
+                    [checked]="selectedCategory === 'pokemon'"
+                    (change)="selectCategory('pokemon')"
                     class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
                   />
                   <label for="filter-category-1" class="pr-6 text-sm font-medium whitespace-nowrap text-gray-900">
@@ -273,7 +261,8 @@
                     id="filter-category-2"
                     type="radio"
                     name="desktop-category"
-                    value="magic-the-gathering"
+                    [checked]="selectedCategory === 'magic-the-gathering'"
+                    (change)="selectCategory('magic-the-gathering')"
                     class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
                   />
                   <label for="filter-category-2" class="pr-6 text-sm font-medium whitespace-nowrap text-gray-900">
@@ -286,7 +275,8 @@
                     id="filter-category-3"
                     type="radio"
                     name="desktop-category"
-                    value="yu-gi-oh"
+                    [checked]="selectedCategory === 'yu-gi-oh'"
+                    (change)="selectCategory('yu-gi-oh')"
                     class="mt-0.5 size-4 border-gray-300 text-black focus:ring-0"
                   />
                   <label for="filter-category-3" class="pr-6 text-sm font-medium whitespace-nowrap text-gray-900">
@@ -300,33 +290,29 @@
 
           <!-- Price -->
           <div class="relative inline-block text-left">
-            <div>
-              <button
-                type="button"
-                (click)="togglePrice()"
-                class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+            <button
+              type="button"
+              (click)="togglePrice()"
+              class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+            >
+              <span>Cena</span>
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+                class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 transition group-hover:text-gray-500"
+                [class.rotate-180]="priceOpen"
               >
-                <span>Cena</span>
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  class="-mr-1 ml-1 size-5 shrink-0 text-gray-400 transition group-hover:text-gray-500"
-                  [class.rotate-180]="priceOpen"
-                >
-                  <path
-                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
 
             @if (priceOpen) {
-            <div
-              class="absolute right-0 z-50 mt-2 min-w-64 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5"
-            >
+            <div class="absolute right-0 z-50 mt-2 min-w-64 rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5">
               <form class="space-y-4">
                 <div>
                   <label for="desktop-min-price" class="block text-sm font-medium text-gray-700">
@@ -337,6 +323,8 @@
                     type="number"
                     min="0"
                     placeholder="0"
+                    [(ngModel)]="minPrice"
+                    name="desktopMinPrice"
                     class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
                   />
                 </div>
@@ -350,12 +338,15 @@
                     type="number"
                     min="0"
                     placeholder="1000"
+                    [(ngModel)]="maxPrice"
+                    name="desktopMaxPrice"
                     class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
                   />
                 </div>
 
                 <button
                   type="button"
+                  (click)="applyPriceFilters()"
                   class="w-full rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-900"
                 >
                   Zastosuj

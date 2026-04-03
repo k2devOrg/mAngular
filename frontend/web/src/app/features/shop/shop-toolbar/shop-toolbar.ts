@@ -1,18 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ProductFilters } from '../models/product-filters';
 
 @Component({
   selector: 'app-shop-toolbar',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './shop-toolbar.html',
   styleUrls: ['./shop-toolbar.css'],
 })
 export class ShopToolbarComponent {
 
+  readonly filtersChanged = output<ProductFilters>();
+
   categoryOpen = false;
   priceOpen = false;
   sortOpen = false;
+
   selectedSortLabel = 'Sortowanie';
+  selectedSort = '';
+
+  selectedCategory = '';
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
 
   toggleCategory() {
     this.categoryOpen = !this.categoryOpen;
@@ -26,6 +36,11 @@ export class ShopToolbarComponent {
     this.sortOpen = false;
   }
 
+  toggleSort() {
+    this.sortOpen = !this.sortOpen;
+    this.categoryOpen = false;
+    this.priceOpen = false;
+  }
 
   closeFilters() {
     this.categoryOpen = false;
@@ -33,16 +48,40 @@ export class ShopToolbarComponent {
     this.sortOpen = false;
   }
 
-
-  toggleSort() {
-    this.sortOpen = !this.sortOpen;
-    this.categoryOpen = false;
-    this.priceOpen = false;
-  }
-
-  selectSort(label: string) {
+  selectSort(label: string, value: string) {
     this.selectedSortLabel = label;
+    this.selectedSort = value;
     this.sortOpen = false;
+    this.emitFilters();
   }
 
+  selectCategory(value: string) {
+    this.selectedCategory = value;
+    this.categoryOpen = false;
+    this.emitFilters();
+  }
+
+  applyPriceFilters() {
+    this.priceOpen = false;
+    this.emitFilters();
+  }
+
+  clearFilters() {
+    this.selectedCategory = '';
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.selectedSort = '';
+    this.selectedSortLabel = 'Sortowanie';
+    this.closeFilters();
+    this.emitFilters();
+  }
+
+  private emitFilters() {
+    this.filtersChanged.emit({
+      category: this.selectedCategory || undefined,
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      sort: this.selectedSort || undefined,
+    });
+  }
 }
