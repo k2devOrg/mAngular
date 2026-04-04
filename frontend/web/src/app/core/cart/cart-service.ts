@@ -45,6 +45,7 @@ export class CartService {
       if (!existing) {
         const newCartItem: CartItem = {
           productId: product.id,
+          slug: product.slug,
           title: product.name,
           price: product.price,
           imgUrl: product.imageUrl,
