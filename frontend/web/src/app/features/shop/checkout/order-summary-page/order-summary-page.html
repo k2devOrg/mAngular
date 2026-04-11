@@ -76,10 +76,21 @@
               <button
                 type="button"
                 (click)="confirmOrder()"
-                class="w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white transition hover:bg-gray-900"
+                [disabled]="isSubmitting()"
+                class="w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white transition hover:bg-gray-900 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Potwierdź zamówienie
-              </button>
+                @if (isSubmitting()) {
+                  Przetwarzanie...
+                } @else {
+                  Potwierdź zamówienie
+                  }
+                  </button>
+
+                 @if (submitError()) {
+                  <p class="mt-3 text-sm text-red-600">
+                    {{ submitError() }}
+                  </p>
+                 }
 
               <a
                 routerLink="/shop/checkout"
