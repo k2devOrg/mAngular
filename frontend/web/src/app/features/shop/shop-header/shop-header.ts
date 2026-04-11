@@ -1,7 +1,6 @@
 import {Component, ElementRef, HostListener, signal, ViewChild} from '@angular/core';
 import {RevealOnScroll} from '../../../shared/directives/reveal-on-scroll';
 import {RouterLink} from '@angular/router';
-import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-shop-header',
@@ -9,7 +8,6 @@ import {NgIf} from '@angular/common';
   imports: [
     RevealOnScroll,
     RouterLink,
-    NgIf
   ],
   templateUrl: './shop-header.html',
   styleUrls: ['./shop-header.css'],

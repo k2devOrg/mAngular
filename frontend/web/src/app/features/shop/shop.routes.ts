@@ -23,5 +23,15 @@ export const shopRoutes: Routes = [
     path: 'checkout',
     loadComponent: () =>
       import('./checkout/checkout-page/checkout-page').then(m => m.CheckoutPageComponent),
+  },
+  {
+    path: 'order-summary',
+    loadComponent: () =>
+      import('./checkout/order-summary-page/order-summary-page').then(m => m.OrderSummaryPageComponent),
+  },
+  {
+    path: 'order-success',
+    loadComponent: () =>
+      import('./checkout/order-success-page/order-success-page').then(m => m.OrderSuccessPageComponent),
   }
 ];
