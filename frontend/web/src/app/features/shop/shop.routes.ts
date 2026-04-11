@@ -10,7 +10,7 @@ export const shopRoutes: Routes = [
   {
     path: 'cart',
     loadComponent: () =>
-      import('../cart/cart-page/cart-page')
+      import('../shop/cart/cart-page/cart-page')
         .then(m => m.CartPageComponent),
   },
   {
@@ -18,5 +18,10 @@ export const shopRoutes: Routes = [
     loadComponent: () =>
       import('./product-details-page/product-details-page')
         .then(m => m.ProductDetailsPageComponent),
+  },
+  {
+    path: 'checkout',
+    loadComponent: () =>
+      import('./checkout/checkout-page/checkout-page').then(m => m.CheckoutPageComponent),
   }
 ];
