@@ -1,9 +1,10 @@
 import {CommonModule} from '@angular/common';
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {RevealOnScroll} from '../../../shared/directives/reveal-on-scroll';
+import {AuthService} from '../../../core/auth/authService';
 
 type Mode = 'signIn' | 'signUp';
 type QueryMode = 'login' | 'register';
@@ -18,16 +19,20 @@ export class AuthPanelComponent {
   private readonly fb = new FormBuilder();
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
 
   private readonly qp = toSignal(this.route.queryParamMap);
 
+  readonly isSubmitting = signal(false);
+  readonly signInError = signal<string | null>(null);
+
   readonly mode = computed<Mode>(() => {
     const m = this.qp()?.get('mode');
-    return m === 'register' ? 'signIn' : 'signUp'; //na odwrot specjalnie
+    return m === 'register' ? 'signIn' : 'signUp'; // na odwrot specjalnie
   });
+
   readonly isSignUp = computed(() => this.mode() === 'signUp');
 
-  // ===== Forms =====
   readonly signInForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -39,7 +44,6 @@ export class AuthPanelComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-// ===== UI classes (computed) =====
   readonly overlayTranslateClass = computed(() =>
     this.isSignUp() ? 'translate-x-full' : 'translate-x-0'
   );
@@ -84,9 +88,22 @@ export class AuthPanelComponent {
       this.signInForm.markAllAsTouched();
       return;
     }
+
+    this.isSubmitting.set(true);
+    this.signInError.set(null);
+
     const payload = this.signInForm.getRawValue();
-    // TODO: call API
-    console.log('SIGN IN', payload);
+
+    this.authService.login(payload).subscribe({
+      next: () => {
+        this.isSubmitting.set(false);
+        this.router.navigate(['/shop']).then();
+      },
+      error: () => {
+        this.isSubmitting.set(false);
+        this.signInError.set('Nieprawidłowy e-mail lub hasło.');
+      }
+    });
   }
 
   submitSignUp() {
@@ -94,8 +111,8 @@ export class AuthPanelComponent {
       this.signUpForm.markAllAsTouched();
       return;
     }
+
     const payload = this.signUpForm.getRawValue();
-    // TODO: call API
     console.log('SIGN UP', payload);
   }
 }
