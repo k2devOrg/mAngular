@@ -27,7 +27,7 @@ export class AuthService {
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, request).pipe(
-      tap(response => {
+      tap((response) => {
         this.setSession(response.token, response.user);
         this._authReady.set(true);
       })
@@ -48,7 +48,7 @@ export class AuthService {
     }
 
     return this.me().pipe(
-      tap(user => {
+      tap((user) => {
         this._user.set(user);
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
         this._authReady.set(true);
