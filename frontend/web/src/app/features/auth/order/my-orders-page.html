@@ -1,0 +1,105 @@
+<section class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8" data-testid="orders-page">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold text-slate-900">Moje zamówienia</h1>
+    <p class="mt-2 text-sm text-slate-500">
+      Historia zamówień przypisanych do Twojego konta.
+    </p>
+  </header>
+
+  @if (loading()) {
+  <div
+    class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+    data-testid="orders-loading"
+  >
+    Ładowanie zamówień...
+  </div>
+  } @else if (error()) {
+  <div
+    class="rounded-2xl border border-rose-200 bg-rose-50 p-6 shadow-sm"
+    data-testid="orders-error"
+  >
+    <p class="text-sm text-rose-700">{{ error() }}</p>
+
+      <button
+        type="button"
+        (click)="loadOrders()"
+        class="mt-4 inline-flex items-center justify-center rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white"
+        data-testid="orders-retry-button"
+      >
+        Spróbuj ponownie
+      </button>
+    </div>
+  } @else if (orders().length === 0) {
+  <div
+    class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+    data-testid="orders-empty"
+  >
+    <p class="text-sm text-slate-600">Nie masz jeszcze żadnych zamówień.</p>
+  </div>
+  } @else {
+  <div class="space-y-6">
+    @for (order of orders(); track trackByOrderId($index, order)) {
+  <article
+    class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+    data-testid="order-card"
+  >
+    <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-900">
+          Zamówienie #{{ order.id }}
+        </h2>
+
+        <div class="mt-2 space-y-1 text-sm text-slate-500">
+          <p>Data: {{ order.createdAt | date:'dd.MM.yyyy HH:mm' }}</p>
+          <p>Status: {{ order.status }}</p>
+          <p>Metoda płatności: {{ order.paymentMethod }}</p>
+        </div>
+      </div>
+
+      <div class="text-left md:text-right">
+        <p class="text-sm text-slate-500">Łączna kwota</p>
+        <p class="text-xl font-semibold text-slate-900">
+          {{ order.totalPrice | number:'1.2-2' }} zł
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <h3 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+        Produkty
+      </h3>
+
+      <div class="space-y-3">
+        @for (item of order.items; track item.productId ?? item.productName) {
+        <div class="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3">
+          <div>
+            <p class="font-medium text-slate-900">{{ item.productName }}</p>
+                    <p class="text-sm text-slate-500">
+                      Ilość: {{ item.quantity }} × {{ item.unitPrice | number:'1.2-2' }} zł
+                    </p>
+                  </div>
+
+                  <div class="text-sm font-semibold text-slate-900">
+        {{ item.lineTotal | number:'1.2-2' }} zł
+                  </div>
+                </div>
+        }
+      </div>
+    </div>
+
+    <div class="mt-6 border-t border-slate-200 pt-4 text-sm text-slate-500">
+      <p>
+        Adres dostawy:
+        {{ order.firstName }} {{ order.lastName }},
+        {{ order.street }},
+        {{ order.postalCode }} {{ order.city }},
+        {{ order.country }}
+      </p>
+      <p class="mt-1">Email: {{ order.email }}</p>
+      <p class="mt-1">Telefon: {{ order.phoneNumber }}</p>
+    </div>
+  </article>
+  }
+  </div>
+  }
+</section>

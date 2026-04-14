@@ -1,9 +1,9 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
-import { LoginRequest} from '../../features/auth/models/login-request';
-import { LoginResponse} from '../../features/auth/models/login-response';
-import { AuthUser} from '../../features/auth/models/auth-user';
+import { catchError, map, Observable, of, tap } from 'rxjs';
+import { LoginRequest } from '../../features/auth/models/login-request';
+import { LoginResponse } from '../../features/auth/models/login-response';
+import { AuthUser } from '../../features/auth/models/auth-user';
 
 const TOKEN_STORAGE_KEY = 'auth_token';
 const USER_STORAGE_KEY = 'auth_user';
@@ -12,30 +12,59 @@ const USER_STORAGE_KEY = 'auth_user';
   providedIn: 'root',
 })
 export class AuthService {
-
   private readonly http = inject(HttpClient);
   private readonly apiUrl = 'http://localhost:8080/api/auth';
 
   private readonly _token = signal<string | null>(localStorage.getItem(TOKEN_STORAGE_KEY));
   private readonly _user = signal<AuthUser | null>(this.getStoredUser());
+  private readonly _authReady = signal(false);
 
   readonly token = this._token.asReadonly();
   readonly user = this._user.asReadonly();
-  readonly isLoggedIn = computed(() => !!this._token());
+  readonly authReady = this._authReady.asReadonly();
 
-  login(request: LoginRequest) {
+  readonly isLoggedIn = computed(() => !!this._token() && !!this._user());
+
+  login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, request).pipe(
       tap(response => {
         this.setSession(response.token, response.user);
+        this._authReady.set(true);
+      })
+    );
+  }
+
+  me(): Observable<AuthUser> {
+    return this.http.get<AuthUser>(`${this.apiUrl}/me`);
+  }
+
+  initAuth(): Observable<boolean> {
+    const token = this._token();
+
+    if (!token) {
+      this.clearSession();
+      this._authReady.set(true);
+      return of(false);
+    }
+
+    return this.me().pipe(
+      tap(user => {
+        this._user.set(user);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+        this._authReady.set(true);
+      }),
+      map(() => true),
+      catchError(() => {
+        this.clearSession();
+        this._authReady.set(true);
+        return of(false);
       })
     );
   }
 
   logout(): void {
-    this._token.set(null);
-    this._user.set(null);
-    localStorage.removeItem(TOKEN_STORAGE_KEY);
-    localStorage.removeItem(USER_STORAGE_KEY);
+    this.clearSession();
+    this._authReady.set(true);
   }
 
   private setSession(token: string, user: AuthUser): void {
@@ -43,6 +72,13 @@ export class AuthService {
     this._user.set(user);
     localStorage.setItem(TOKEN_STORAGE_KEY, token);
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+  }
+
+  private clearSession(): void {
+    this._token.set(null);
+    this._user.set(null);
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
+    localStorage.removeItem(USER_STORAGE_KEY);
   }
 
   private getStoredUser(): AuthUser | null {
