@@ -1,14 +1,14 @@
-<section class="bg-white py-16">
+<section class="bg-white py-16" data-testid="checkout-page">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold tracking-wide text-gray-900">
+    <h1 class="text-3xl font-bold tracking-wide text-gray-900" data-testid="checkout-heading">
       Dostawa i płatność
     </h1>
 
     @if (cartService.cartItems().length > 0) {
-    <div class="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-3">
+    <div class="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-3" data-testid="checkout-filled">
       <div class="lg:col-span-2">
-        <form [formGroup]="checkoutForm" class="space-y-10" (ngSubmit)="submitOrder()">
-          <section>
+        <form [formGroup]="checkoutForm" class="space-y-10" (ngSubmit)="submitOrder()" data-testid="checkout-form">
+          <section data-testid="checkout-contact-section">
             <h2 class="text-xl font-semibold text-gray-900">Dane kontaktowe</h2>
 
             <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -19,6 +19,7 @@
                   type="email"
                   formControlName="email"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-email"
                 />
               </div>
 
@@ -29,6 +30,7 @@
                   type="text"
                   formControlName="firstName"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-first-name"
                 />
               </div>
 
@@ -39,6 +41,7 @@
                   type="text"
                   formControlName="lastName"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-last-name"
                 />
               </div>
 
@@ -49,12 +52,13 @@
                   type="text"
                   formControlName="phoneNumber"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-phone-number"
                 />
               </div>
             </div>
           </section>
 
-          <section>
+          <section data-testid="checkout-address-section">
             <h2 class="text-xl font-semibold text-gray-900">Adres dostawy</h2>
 
             <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -65,6 +69,7 @@
                   type="text"
                   formControlName="street"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-street"
                 />
               </div>
 
@@ -75,6 +80,7 @@
                   type="text"
                   formControlName="postalCode"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-postal-code"
                 />
               </div>
 
@@ -85,6 +91,7 @@
                   type="text"
                   formControlName="city"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-city"
                 />
               </div>
 
@@ -95,62 +102,84 @@
                   type="text"
                   formControlName="country"
                   class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black focus:outline-none focus:ring-0"
+                  data-testid="checkout-country"
                 />
               </div>
             </div>
           </section>
 
-          <section>
+          <section data-testid="checkout-payment-section">
             <h2 class="text-xl font-semibold text-gray-900">Metoda płatności</h2>
 
-            <div class="mt-6 space-y-4">
+            <div class="mt-6 space-y-4" data-testid="checkout-payment-methods">
               <label class="flex items-center gap-3">
-                <input type="radio" formControlName="paymentMethod" value="card" />
+                <input
+                  type="radio"
+                  formControlName="paymentMethod"
+                  value="card"
+                  data-testid="checkout-payment-card"
+                />
                 <span class="text-sm text-gray-700">Karta płatnicza</span>
               </label>
 
               <label class="flex items-center gap-3">
-                <input type="radio" formControlName="paymentMethod" value="blik" />
+                <input
+                  type="radio"
+                  formControlName="paymentMethod"
+                  value="blik"
+                  data-testid="checkout-payment-blik"
+                />
                 <span class="text-sm text-gray-700">BLIK</span>
               </label>
 
               <label class="flex items-center gap-3">
-                <input type="radio" formControlName="paymentMethod" value="bank-transfer" />
+                <input
+                  type="radio"
+                  formControlName="paymentMethod"
+                  value="bank-transfer"
+                  data-testid="checkout-payment-bank-transfer"
+                />
                 <span class="text-sm text-gray-700">Przelew online</span>
               </label>
             </div>
           </section>
 
           <div class="mt-10">
-  <button
-    type="submit"
-    class="w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white hover:bg-gray-900 transition"
-  >
-    Złóż zamówienie
-  </button>
-</div>
+            <button
+              type="submit"
+              class="w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white hover:bg-gray-900 transition"
+              data-testid="checkout-submit"
+            >
+              Złóż zamówienie
+            </button>
+          </div>
         </form>
       </div>
 
       <div class="lg:col-span-1">
-        <div class="rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:p-8">
+        <div class="rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:p-8" data-testid="checkout-summary">
           <h2 class="text-lg font-semibold text-gray-900">Podsumowanie zamówienia</h2>
 
-          <ul class="mt-6 space-y-4">
+          <ul class="mt-6 space-y-4" data-testid="checkout-summary-items">
             @for (item of cartService.cartItems(); track item.productId) {
-    <li class="flex items-center gap-4">
+    <li class="flex items-center gap-4" data-testid="checkout-summary-item">
       <img
         [src]="item.imgUrl"
         [alt]="item.title"
         class="size-16 rounded-md object-cover"
+        data-testid="checkout-summary-item-image"
       />
 
       <div class="flex-1">
-        <p class="text-sm font-medium text-gray-900">{{ item.title }}</p>
-        <p class="text-sm text-gray-500">Ilość: {{ item.quantity }}</p>
+        <p class="text-sm font-medium text-gray-900" data-testid="checkout-summary-item-title">
+          {{ item.title }}
+        </p>
+        <p class="text-sm text-gray-500" data-testid="checkout-summary-item-quantity">
+          Ilość: {{ item.quantity }}
+        </p>
       </div>
 
-      <p class="text-sm font-medium text-gray-900">
+      <p class="text-sm font-medium text-gray-900" data-testid="checkout-summary-item-price">
         {{ item.price * item.quantity }} zł
       </p>
     </li>
@@ -160,12 +189,16 @@
     <div class="mt-6 border-t border-gray-200 pt-6">
       <div class="flex justify-between text-base font-medium text-gray-900">
         <span>Łącznie</span>
-        <span>{{ cartService.totalPrice() }} zł</span>
+        <span data-testid="checkout-summary-total">{{ cartService.totalPrice() }} zł</span>
               </div>
             </div>
 
             <div class="mt-6 text-sm text-gray-500">
-              <a routerLink="/shop/cart" class="font-medium text-gray-700 hover:text-black transition">
+              <a
+                routerLink="/shop/cart"
+                class="font-medium text-gray-700 hover:text-black transition"
+                data-testid="checkout-back-to-cart"
+              >
                 ← Powrót do koszyka
               </a>
             </div>
@@ -173,13 +206,17 @@
         </div>
       </div>
     } @else {
-    <div class="mt-12 text-center">
-      <h2 class="text-lg font-medium text-gray-900">
+    <div class="mt-12 text-center" data-testid="checkout-empty">
+      <h2 class="text-lg font-medium text-gray-900" data-testid="checkout-empty-heading">
         Twój koszyk jest pusty
       </h2>
 
       <div class="mt-8 text-sm text-gray-500">
-        <a routerLink="/shop" class="font-medium text-gray-700 hover:text-black transition">
+        <a
+          routerLink="/shop"
+          class="font-medium text-gray-700 hover:text-black transition"
+          data-testid="checkout-empty-back-to-shop"
+        >
           Powrót do sklepu →
         </a>
       </div>

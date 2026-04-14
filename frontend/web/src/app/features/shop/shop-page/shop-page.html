@@ -1,4 +1,5 @@
-<app-shop-header />
-<app-shop-toolbar (filtersChanged)="onFiltersChanged($event)"></app-shop-toolbar>
-
-<app-product-grid [filters]="filters()"></app-product-grid>
+<div data-testid="shop-page">
+  <app-shop-header />
+  <app-shop-toolbar (filtersChanged)="onFiltersChanged($event)"></app-shop-toolbar>
+  <app-product-grid [filters]="filters()"></app-product-grid>
+</div>

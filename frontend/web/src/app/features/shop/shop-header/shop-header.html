@@ -1,74 +1,100 @@
-<section appRevealOnScroll class="relative bg-cover bg-center min-h-[55vh]"
-         style="background-image: url('/assets/shop/hero-shop.png');"
+<section
+  appRevealOnScroll
+  class="relative bg-cover bg-center min-h-[55vh]"
+  style="background-image: url('/assets/shop/hero-shop.png');"
+  data-testid="shop-hero"
 >
   <div class="mx-auto max-w-7xl px-4 sm:px-12 lg:px-14">
-
     <!-- HERO -->
-
-
   </div>
 </section>
 
-<section class="bg-gray-50 py-12">
+<section class="bg-gray-50 py-12" data-testid="shop-banners-section">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div
+      class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      data-testid="shop-banners-grid"
+    >
 
       <!-- NOWOŚCI -->
-      <div class="group relative overflow-hidden rounded-3xl bg-black text-white shadow-lg">
-        <img src="/assets/banners/new-drop.png"
-             class="absolute inset-0 h-full w-full object-cover opacity-70 group-hover:scale-105 transition duration-500" />
+      <div
+        class="group relative overflow-hidden rounded-3xl bg-black text-white shadow-lg"
+        data-testid="shop-banner-new-drop"
+      >
+        <img
+          src="/assets/banners/new-drop.png"
+          class="absolute inset-0 h-full w-full object-cover opacity-70 group-hover:scale-105 transition duration-500"
+        />
 
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
         <div class="relative p-6 min-h-[220px] flex flex-col justify-end">
-          <h3 class="text-2xl font-bold">Nowy drop</h3>
-          <p class="mt-2 text-sm text-white/80">
+          <h3 class="text-2xl font-bold" data-testid="shop-banner-new-drop-title">Nowy drop</h3>
+          <p class="mt-2 text-sm text-white/80" data-testid="shop-banner-new-drop-description">
             Najnowsze sety i świeże dostawy.
           </p>
-          <a [routerLink]="['/shop']"
-             [queryParams]="{ sort: 'newest' }"
-             class="mt-4 inline-flex w-fit items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90">
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ sort: 'newest' }"
+            class="mt-4 inline-flex w-fit items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
+            data-testid="shop-banner-new-drop-cta"
+          >
             Zobacz nowości
           </a>
         </div>
       </div>
 
       <!-- PROMOCJE -->
-      <div class="group relative overflow-hidden rounded-3xl bg-red-600 text-white shadow-lg">
-        <img src="/assets/banners/sale.png"
-             class="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:scale-105 transition duration-500" />
+      <div
+        class="group relative overflow-hidden rounded-3xl bg-red-600 text-white shadow-lg"
+        data-testid="shop-banner-sale"
+      >
+        <img
+          src="/assets/banners/sale.png"
+          class="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:scale-105 transition duration-500"
+        />
 
         <div class="absolute inset-0 bg-black/40"></div>
 
         <div class="relative p-6 min-h-[220px] flex flex-col justify-end">
-          <h3 class="text-2xl font-bold">Wyjątkowe okazje</h3>
-          <p class="mt-2 text-sm text-white/90">
+          <h3 class="text-2xl font-bold" data-testid="shop-banner-sale-title">Wyjątkowe okazje</h3>
+          <p class="mt-2 text-sm text-white/90" data-testid="shop-banner-sale-description">
             Produkty do -40% — ograniczona liczba sztuk.
           </p>
-          <a [routerLink]="['/shop']"
-             [queryParams]="{ onSale: true }"
-             class="mt-4 inline-flex w-fit items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90">
+          <a
+            [routerLink]="['/shop']"
+            [queryParams]="{ onSale: true }"
+            class="mt-4 inline-flex w-fit items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
+            data-testid="shop-banner-sale-cta"
+          >
             Sprawdź promocje
           </a>
         </div>
       </div>
 
       <!-- RABAT / KONTO -->
-      <div class="group relative overflow-hidden rounded-3xl bg-gray-900 text-white shadow-lg">
-        <img src="/assets/banners/discount.png"
-             class="absolute inset-0 h-full w-full object-cover opacity-50 group-hover:scale-105 transition duration-500" />
+      <div
+        class="group relative overflow-hidden rounded-3xl bg-gray-900 text-white shadow-lg"
+        data-testid="shop-banner-register"
+      >
+        <img
+          src="/assets/banners/discount.png"
+          class="absolute inset-0 h-full w-full object-cover opacity-50 group-hover:scale-105 transition duration-500"
+        />
 
         <div class="absolute inset-0 bg-black/50"></div>
 
         <div class="relative p-6 min-h-[220px] flex flex-col justify-end">
-          <h3 class="text-2xl font-bold">Odbierz rabat</h3>
-          <p class="mt-2 text-sm text-white/80">
+          <h3 class="text-2xl font-bold" data-testid="shop-banner-register-title">Odbierz rabat</h3>
+          <p class="mt-2 text-sm text-white/80" data-testid="shop-banner-register-description">
             Załóż konto i zgarnij -10% na pierwsze zamówienie.
           </p>
-          <a [routerLink]="['/auth']"
-             [queryParams]="{ mode: 'register' }"
-             class="mt-4 inline-flex w-fit items-center justify-center rounded-xl border border-white px-4 py-2 text-sm font-semibold hover:bg-white hover:text-black transition">
+          <a
+            [routerLink]="['/auth']"
+            [queryParams]="{ mode: 'register' }"
+            class="mt-4 inline-flex w-fit items-center justify-center rounded-xl border border-white px-4 py-2 text-sm font-semibold hover:bg-white hover:text-black transition"
+            data-testid="shop-banner-register-cta"
+          >
             Zarejestruj się
           </a>
         </div>

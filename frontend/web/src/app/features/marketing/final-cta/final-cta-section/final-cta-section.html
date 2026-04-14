@@ -1,12 +1,18 @@
-<section appRevealOnScroll class="reveal-section relative py-24 md:py-32">
+<section
+  appRevealOnScroll
+  class="reveal-section relative py-24 md:py-32"
+  data-testid="cta-section"
+>
   <!-- background -->
   <div class="absolute inset-0 bg-gradient-to-b from-gray-200 to-black"></div>
-
   <div class="absolute inset-0 bg-black/20"></div>
 
   <!-- content -->
   <div class="relative max-w-3xl mx-auto px-4 text-center">
-    <h2 class="stagger-item text-2xl md:text-3xl font-medium text-amber-50 tracking-wider mb-10">
+    <h2
+      class="stagger-item text-2xl md:text-3xl font-medium text-amber-50 tracking-wider mb-10"
+      data-testid="cta-heading"
+    >
       Gotowy na rozpoczęcie kolekcji?
     </h2>
 
@@ -16,6 +22,7 @@
              transition hover:bg-white focus:outline-none focus-visible:ring-2
              focus-visible:ring-neutral-100 focus-visible:ring-offset-2
              focus-visible:ring-offset-neutral-900"
+      data-testid="cta-button"
     >
       Przejdź do sklepu
     </button>

@@ -1,6 +1,9 @@
-<section class="bg-white py-20">
+<section class="bg-white py-20" data-testid="order-success-page">
   <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+    <div
+      class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100"
+      data-testid="order-success-icon"
+    >
       <svg
         viewBox="0 0 20 20"
         fill="currentColor"
@@ -15,31 +18,35 @@
       </svg>
     </div>
 
-    <h1 class="mt-6 text-3xl font-bold tracking-tight text-gray-900">
+    <h1 class="mt-6 text-3xl font-bold tracking-tight text-gray-900" data-testid="order-success-heading">
       Dziękujemy za zakupy
     </h1>
 
-    <p class="mt-4 text-base leading-7 text-gray-600">
+    <p class="mt-4 text-base leading-7 text-gray-600" data-testid="order-success-message">
       Twoje zamówienie zostało przyjęte i jest obecnie przetwarzane.
     </p>
 
-    <p class="mt-2 text-base leading-7 text-gray-600">
+    <p class="mt-2 text-base leading-7 text-gray-600" data-testid="order-success-email-message">
       Na podany adres e-mail prześlemy potwierdzenie zamówienia oraz dalsze informacje dotyczące realizacji.
     </p>
 
     @if (hasPlacedOrder()) {
-    <div class="mt-8 rounded-lg bg-gray-50 p-6 text-left text-sm text-gray-700">
-      <p><strong>Numer zamówienia:</strong> #{{ placedOrder()!.id }}</p>
-    <p class="mt-2"><strong>Status:</strong> {{ placedOrder()!.status }}</p>
-    <p class="mt-2"><strong>Kwota:</strong> {{ placedOrder()!.totalPrice }} zł</p>
-    <p class="mt-2"><strong>E-mail:</strong> {{ placedOrder()!.email }}</p>
-  </div>
+    <div
+      class="mt-8 rounded-lg bg-gray-50 p-6 text-left text-sm text-gray-700"
+      data-testid="order-success-details"
+    >
+      <p data-testid="order-success-id"><strong>Numer zamówienia:</strong> #{{ placedOrder()!.id }}</p>
+        <p class="mt-2" data-testid="order-success-status"><strong>Status:</strong> {{ placedOrder()!.status }}</p>
+        <p class="mt-2" data-testid="order-success-total-price"><strong>Kwota:</strong> {{ placedOrder()!.totalPrice }} zł</p>
+        <p class="mt-2" data-testid="order-success-email"><strong>E-mail:</strong> {{ placedOrder()!.email }}</p>
+      </div>
     }
 
     <div class="mt-10 space-y-3 sm:flex sm:justify-center sm:space-y-0 sm:space-x-4">
       <a
         routerLink="/shop"
         class="block rounded-md bg-black px-6 py-3 text-base font-medium text-white transition hover:bg-gray-900"
+        data-testid="order-success-back-to-shop"
       >
         Wróć do sklepu
       </a>
@@ -48,6 +55,7 @@
         routerLink="/shop"
         fragment="top"
         class="block rounded-md border border-gray-300 px-6 py-3 text-base font-medium text-gray-700 transition hover:bg-gray-50"
+        data-testid="order-success-continue-browsing"
       >
         Kontynuuj przeglądanie
       </a>

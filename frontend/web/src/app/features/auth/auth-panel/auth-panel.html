@@ -1,52 +1,62 @@
-<div appRevealOnScroll class="reveal-section mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+<div
+  appRevealOnScroll
+  class="reveal-section mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8"
+  data-testid="auth-panel"
+>
   <div class="w-full max-w-5xl">
     <div class="relative overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-black/5">
 
       <!-- MOBILE (< md) -->
-      <div class="md:hidden p-6">
-        <div class="relative min-h-[420px]"> <!-- min-h żeby layout nie skakał -->
+      <div class="md:hidden p-6" data-testid="auth-panel-mobile">
+        <div class="relative min-h-[420px]">
 
           <!-- SIGN IN -->
           <div
             class="absolute inset-0 transition-all duration-500 ease-out"
             [class]="mobileSignInClass()"
+            data-testid="auth-signin-mobile"
           >
             <h2 class="text-2xl font-bold text-slate-900">Zaloguj się</h2>
             <p class="mt-2 text-sm text-slate-500">Zaloguj się do sklepu TCG.</p>
 
             <div class="mt-6">
-              <form [formGroup]="signInForm" (ngSubmit)="submitSignIn()" class="space-y-4">
+              <form
+                [formGroup]="signInForm"
+                (ngSubmit)="submitSignIn()"
+                class="space-y-4"
+                data-testid="login-form-mobile"
+              >
                 <div>
                   <label class="block text-sm font-medium text-slate-700">Email</label>
-                  <input formControlName="email" type="email"
-                         class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
-                         placeholder="email@domain.com" />
-<!--                  @if (signInForm.controls.email.touched && signInForm.controls.email.invalid) {-->
-
-<!--                  <p class="mt-1 text-xs text-rose-600">Podaj poprawny email.</p>-->
-
-<!--                  }-->
+                  <input
+                    formControlName="email"
+                    type="email"
+                    class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
+                    placeholder="email@domain.com"
+                    data-testid="login-email-mobile"
+                  />
                 </div>
 
                 <div>
                   <label class="block text-sm font-medium text-slate-700">Hasło</label>
-                  <input formControlName="password" type="password"
-                         class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
-                         placeholder="••••••••" />
-<!--                  @if (signInForm.controls.password.touched && signInForm.controls.password.invalid) {-->
-
-<!--                  <p class="mt-1 text-xs text-rose-600">Hasło min. 6 znaków.</p>-->
-
-<!--                  }-->
-
+                  <input
+                    formControlName="password"
+                    type="password"
+                    class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
+                    placeholder="••••••••"
+                    data-testid="login-password-mobile"
+                  />
                 </div>
 
                 <button type="button" class="text-sm font-medium text-slate-500 hover:text-slate-900">
                   Przypomnij hasło
                 </button>
 
-                <button type="submit"
-                        class="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-black">
+                <button
+                  type="submit"
+                  class="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-black"
+                  data-testid="login-submit-mobile"
+                >
                   Zaloguj się
                 </button>
               </form>
@@ -54,8 +64,12 @@
 
             <div class="mt-6 flex items-center justify-between border-t pt-4">
               <p class="text-sm text-slate-600">Nie masz konta?</p>
-              <button type="button" (click)="toggleMode()"
-                      class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+              <button
+                type="button"
+                (click)="toggleMode()"
+                class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                data-testid="auth-switch-to-register-mobile"
+              >
                 Zarejestruj się
               </button>
             </div>
@@ -65,17 +79,27 @@
           <div
             class="absolute inset-0 transition-all duration-500 ease-out"
             [class]="mobileSignUpClass()"
+            data-testid="auth-signup-mobile"
           >
             <h2 class="text-2xl font-bold text-slate-900">Zarejestruj się</h2>
             <p class="mt-2 text-sm text-slate-500">Utwórz konto i zbieraj zamówienia.</p>
 
             <div class="mt-6">
-              <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()" class="space-y-4">
+              <form
+                [formGroup]="signUpForm"
+                (ngSubmit)="submitSignUp()"
+                class="space-y-4"
+                data-testid="register-form-mobile"
+              >
                 <div>
                   <label class="block text-sm font-medium text-slate-700">Email</label>
-                  <input formControlName="email" type="email"
-                         class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
-                         placeholder="email@domain.com" />
+                  <input
+                    formControlName="email"
+                    type="email"
+                    class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
+                    placeholder="email@domain.com"
+                    data-testid="register-email-mobile"
+                  />
                   @if (signUpForm.controls.email.touched && signUpForm.controls.email.invalid) {
                   <p class="mt-1 text-xs text-rose-600">Podaj poprawny email.</p>
                   }
@@ -83,16 +107,23 @@
 
                 <div>
                   <label class="block text-sm font-medium text-slate-700">Hasło</label>
-                  <input formControlName="password" type="password"
-                         class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
-                         placeholder="••••••••" />
+                  <input
+                    formControlName="password"
+                    type="password"
+                    class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
+                    placeholder="••••••••"
+                    data-testid="register-password-mobile"
+                  />
                   @if (signUpForm.controls.password.touched && signUpForm.controls.password.invalid) {
                   <p class="mt-1 text-xs text-rose-600">Hasło min. 6 znaków.</p>
                   }
                 </div>
 
-                <button type="submit"
-                        class="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-black">
+                <button
+                  type="submit"
+                  class="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-black"
+                  data-testid="register-submit-mobile"
+                >
                   Zarejestruj się
                 </button>
               </form>
@@ -100,8 +131,12 @@
 
             <div class="mt-6 flex items-center justify-between border-t pt-4">
               <p class="text-sm text-slate-600">Masz konto?</p>
-              <button type="button" (click)="toggleMode()"
-                      class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+              <button
+                type="button"
+                (click)="toggleMode()"
+                class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                data-testid="auth-switch-to-login-mobile"
+              >
                 Zaloguj się
               </button>
             </div>
@@ -111,17 +146,25 @@
       </div>
 
       <!-- DESKTOP (md+) -->
-      <div class="relative hidden md:block">
-        <!-- GRID jako baza wymiarów -->
+      <div class="relative hidden md:block" data-testid="auth-panel-desktop">
         <div class="grid min-h-[450px] grid-cols-2">
           <!-- LEFT (Sign In) -->
           <div class="relative z-20 p-10">
-            <div class="absolute inset-0 p-10 transform transition-all duration-1000 ease-in-out"
-                 [class]="signInPanelClass()">
+            <div
+              class="absolute inset-0 p-10 transform transition-all duration-1000 ease-in-out"
+              [class]="signInPanelClass()"
+              data-testid="auth-signin-desktop"
+            >
               <h2 class="text-2xl font-bold text-slate-900">Zaloguj się</h2>
               <p class="mt-2 text-sm text-slate-500">Zaloguj się do sklepu TCG.</p>
+
               <div class="mt-6">
-                <form [formGroup]="signInForm" (ngSubmit)="submitSignIn()" class="space-y-4">
+                <form
+                  [formGroup]="signInForm"
+                  (ngSubmit)="submitSignIn()"
+                  class="space-y-4"
+                  data-testid="login-form"
+                >
                   <div>
                     <label class="block text-sm font-medium text-slate-700">Email</label>
                     <input
@@ -129,6 +172,7 @@
                       type="email"
                       class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
                       placeholder="email@domain.com"
+                      data-testid="login-email"
                     />
                     @if (signInForm.controls.email.touched && signInForm.controls.email.invalid) {
                     <p class="mt-1 text-xs text-rose-600">Podaj poprawny email.</p>
@@ -142,6 +186,7 @@
                       type="password"
                       class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
                       placeholder="••••••••"
+                      data-testid="login-password"
                     />
                     @if (signInForm.controls.password.touched && signInForm.controls.password.invalid) {
                     <p class="mt-1 text-xs text-rose-600">Hasło min. 6 znaków.</p>
@@ -156,6 +201,7 @@
                     type="submit"
                     [disabled]="isSubmitting()"
                     class="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-black disabled:cursor-not-allowed disabled:opacity-50"
+                    data-testid="login-submit"
                   >
                     @if (isSubmitting()) {
                     Logowanie...
@@ -165,8 +211,9 @@
                   </button>
                 </form>
               </div>
+
               @if (signInError()) {
-              <p class="mt-1 text-xs text-rose-600">
+              <p class="mt-1 text-xs text-rose-600" data-testid="login-error">
               {{ signInError() }}
               </p>
               }
@@ -175,12 +222,21 @@
 
           <!-- RIGHT (Sign Up) -->
           <div class="relative z-20 p-10">
-            <div class="absolute inset-0 p-10 transform transition-all duration-1000 ease-in-out"
-                 [class]="signUpPanelClass()">
+            <div
+              class="absolute inset-0 p-10 transform transition-all duration-1000 ease-in-out"
+              [class]="signUpPanelClass()"
+              data-testid="auth-signup-desktop"
+            >
               <h2 class="text-2xl font-bold text-slate-900">Zarejestruj się</h2>
               <p class="mt-2 text-sm text-slate-500">Utwórz konto i zbieraj zamówienia.</p>
+
               <div class="mt-6">
-                <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()" class="space-y-4">
+                <form
+                  [formGroup]="signUpForm"
+                  (ngSubmit)="submitSignUp()"
+                  class="space-y-4"
+                  data-testid="register-form"
+                >
                   <div>
                     <label class="block text-sm font-medium text-slate-700">Email</label>
                     <input
@@ -188,6 +244,7 @@
                       type="email"
                       class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
                       placeholder="email@domain.com"
+                      data-testid="register-email"
                     />
                     @if (signUpForm.controls.email.touched && signUpForm.controls.email.invalid) {
                     <p class="mt-1 text-xs text-rose-600">Podaj poprawny email.</p>
@@ -201,6 +258,7 @@
                       type="password"
                       class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black"
                       placeholder="••••••••"
+                      data-testid="register-password"
                     />
                     @if (signUpForm.controls.password.touched && signUpForm.controls.password.invalid) {
                     <p class="mt-1 text-xs text-rose-600">Hasło min. 6 znaków.</p>
@@ -210,6 +268,7 @@
                   <button
                     type="submit"
                     class="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-black"
+                    data-testid="register-submit"
                   >
                     Zarejestruj się
                   </button>
@@ -220,7 +279,7 @@
         </div>
 
         <!-- SLIDER (desktop) -->
-        <div class="pointer-events-none absolute inset-0 z-30">
+        <div class="pointer-events-none absolute inset-0 z-30" data-testid="auth-slider">
           <div
             class="pointer-events-none absolute left-0 top-0 h-full w-1/2 transition-transform duration-1000 ease-in-out"
             [class]="overlayTranslateClass()"
@@ -242,6 +301,7 @@
                     type="button"
                     (click)="toggleMode()"
                     class="pointer-events-auto mt-8 inline-flex items-center justify-center rounded-lg border border-white/50 px-6 py-2 text-sm font-semibold hover:bg-white/10"
+                    data-testid="auth-toggle-mode"
                   >
                     {{ isSignUp() ? 'Zarejestruj się' : 'Zaloguj się' }}
                   </button>
@@ -251,6 +311,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

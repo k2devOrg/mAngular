@@ -1,38 +1,58 @@
-<footer class="bg-black py-16">
+<footer class="bg-black py-16" data-testid="footer">
   <div
     class="mx-auto max-w-7xl px-4
            grid grid-cols-1 gap-10
            md:grid-cols-3 md:items-center"
   >
     <!-- left: copyright -->
-    <div class="text-center md:text-left text-sm text-neutral-400">
+    <div class="text-center md:text-left text-sm text-neutral-400" data-testid="footer-copyright">
       © 2026 CardApp
     </div>
 
     <!-- center: legal links -->
-    <nav class="flex justify-center gap-6 text-sm text-neutral-400">
-      <a routerLink="/terms" class="hover:text-neutral-200 transition">
+    <nav class="flex justify-center gap-6 text-sm text-neutral-400" data-testid="footer-legal-nav">
+      <a
+        routerLink="/terms"
+        class="hover:text-neutral-200 transition"
+        data-testid="footer-link-terms"
+      >
         Regulamin
       </a>
-      <a routerLink="/privacy-policy" class="hover:text-neutral-200 transition">
+      <a
+        routerLink="/privacy-policy"
+        class="hover:text-neutral-200 transition"
+        data-testid="footer-link-privacy-policy"
+      >
         Polityka prywatności
       </a>
-      <a routerLink="/returns" class="hover:text-neutral-200 transition">
+      <a
+        routerLink="/returns"
+        class="hover:text-neutral-200 transition"
+        data-testid="footer-link-returns"
+      >
         Zwroty
       </a>
     </nav>
 
     <!-- right: social icons -->
-    <div class="flex justify-center md:justify-end gap-4">
+    <div class="flex justify-center md:justify-end gap-4" data-testid="footer-socials">
       <!-- Twitter / X -->
-      <a href="#" class="text-neutral-400 hover:text-neutral-200 transition">
+      <a
+        href="#"
+        class="text-neutral-400 hover:text-neutral-200 transition"
+        data-testid="footer-social-x"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.965 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/>
         </svg>
       </a>
 
       <!-- Instagram -->
-      <a href="#" class="text-neutral-400 hover:text-neutral-200 transition">
+      <a
+        href="#"
+        class="text-neutral-400 hover:text-neutral-200 transition"
+        data-testid="footer-social-instagram"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
           <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm6.5-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
         </svg>
