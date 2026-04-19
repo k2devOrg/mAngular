@@ -9,10 +9,25 @@ export const authRoutes: Routes = [
         .then(m => m.AuthPanelComponent),
   },
   {
-    path: 'my-orders',
+    path: 'profile',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./order/my-orders-page')
-        .then(m => m.MyOrdersPageComponent),
+      import('./profile/profile-page/profile-page')
+        .then(m => m.ProfilePageComponent),
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./profile/profile-details-page/profile-details-page')
+            .then(m => m.ProfileDetailsPageComponent),
+      },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./profile/order/my-orders-page')
+            .then(m => m.MyOrdersPageComponent),
+      }
+    ]
   }
 ];

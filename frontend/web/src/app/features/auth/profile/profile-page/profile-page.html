@@ -1,0 +1,49 @@
+<section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8" data-testid="profile-page">
+  <header class="mb-8" data-testid="profile-header">
+    <p class="text-sm font-medium uppercase tracking-wide text-slate-500">
+      Panel użytkownika
+    </p>
+
+    <h1 class="mt-2 text-3xl font-bold text-slate-900">
+      Moje konto
+    </h1>
+
+    @if (authService.user(); as user) {
+    <p class="mt-2 text-sm text-slate-500" data-testid="profile-subtitle">
+      Zalogowano jako {{ user.firstName }} {{ user.lastName }} ({{ user.email }})
+      </p>
+    }
+  </header>
+
+  <div class="grid gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
+    <aside
+      class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+      data-testid="profile-sidebar"
+    >
+      <nav class="space-y-2" data-testid="profile-nav">
+        <a
+          routerLink="/auth/profile"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="bg-black text-white"
+          class="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+          data-testid="profile-tab-details"
+        >
+          Moje dane
+        </a>
+
+        <a
+          routerLink="/auth/profile/orders"
+          routerLinkActive="bg-black text-white"
+          class="flex items-center rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+          data-testid="profile-tab-orders"
+        >
+          Moje zamówienia
+        </a>
+      </nav>
+    </aside>
+
+    <div data-testid="profile-content">
+      <router-outlet />
+    </div>
+  </div>
+</section>

@@ -42,20 +42,21 @@
         </a>
       } @else {
       <a
-        routerLink="/shop"
+        routerLink="/auth/profile"
         class="text-sm text-white/70 hover:text-white md:text-base hover:opacity-80 transition duration-300"
         data-testid="header-link-account"
-      >
+        >
         Moje Konto
       </a>
 
-      <a
-        routerLink="/shop"
-        class="text-sm text-white/70 hover:text-white md:text-base hover:opacity-80 transition duration-300"
-        data-testid="header-button-logout"
-      >
-        Wyloguj się
-      </a>
+      <button
+  type="button"
+  (click)="logout()"
+  class="text-sm text-white/70 hover:text-white md:text-base hover:opacity-80 transition duration-300"
+  data-testid="header-button-logout"
+>
+  Wyloguj się
+</button>
       }
 
       <div class="flow-root ml-2" data-testid="header-cart-desktop">

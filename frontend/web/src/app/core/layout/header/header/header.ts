@@ -2,6 +2,7 @@ import {Component, inject, signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {AuthService} from '../../../auth/authService';
 import {CartService} from '../../../cart/cart-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,7 @@ export class HeaderComponent {
   authService: AuthService = inject(AuthService);
   cartService: CartService = inject(CartService);
   isLoggedIn = this.authService.isLoggedIn
+  private readonly router = inject(Router);
 
   toggleMobileMenu() {
     if (this.isMenuOpen()) {
@@ -40,5 +42,10 @@ export class HeaderComponent {
     setTimeout(() => {
       this.isMenuOpen.set(false);
     }, 300);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/shop']).then();
   }
 }

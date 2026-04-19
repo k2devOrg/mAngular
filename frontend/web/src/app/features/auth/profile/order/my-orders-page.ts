@@ -1,9 +1,9 @@
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderService} from '../../shop/services/order-service';
-import { OrderResponse} from '../../shop/models/order-response';
-import { AuthService } from '../../../core/auth/authService';
+import { OrderService} from '../../../shop/services/order-service';
+import { OrderResponse} from '../../../shop/models/order-response';
+import { AuthService} from '../../../../core/auth/authService';
 
 @Component({
   selector: 'app-my-orders-page',

@@ -97,7 +97,7 @@ export class AuthPanelComponent {
     this.authService.login(payload).subscribe({
       next: () => {
         this.isSubmitting.set(false);
-        this.router.navigate(['/auth/my-orders']).then();
+        this.router.navigate(['/auth/profile']).then();
       },
       error: () => {
         this.isSubmitting.set(false);
