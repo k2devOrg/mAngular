@@ -4,6 +4,7 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
 import { LoginRequest } from '../../features/auth/models/login-request';
 import { LoginResponse } from '../../features/auth/models/login-response';
 import { AuthUser } from '../../features/auth/models/auth-user';
+import {ConfigService} from '../core/config.service';
 
 const TOKEN_STORAGE_KEY = 'auth_token';
 const USER_STORAGE_KEY = 'auth_user';
@@ -13,7 +14,11 @@ const USER_STORAGE_KEY = 'auth_user';
 })
 export class AuthService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/auth';
+  private readonly config = inject(ConfigService);
+
+  private get apiUrl(): string {
+    return `${this.config.apiUrl}/auth`;
+  }
 
   private readonly _token = signal<string | null>(localStorage.getItem(TOKEN_STORAGE_KEY));
   private readonly _user = signal<AuthUser | null>(this.getStoredUser());

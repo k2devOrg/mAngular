@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreateOrderRequest } from '../models/create-order-request';
 import { OrderResponse } from '../models/order-response';
+import {ConfigService} from '../../../core/core/config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,11 @@ import { OrderResponse } from '../models/order-response';
 export class OrderService {
 
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/orders';
+  private readonly config = inject(ConfigService);
+
+  private get apiUrl(): string {
+    return `${this.config.apiUrl}/orders`;
+  }
 
   createOrder(request: CreateOrderRequest): Observable<OrderResponse> {
     return this.http.post<OrderResponse>(this.apiUrl, request);

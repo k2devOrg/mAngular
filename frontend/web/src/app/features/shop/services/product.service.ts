@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Product} from '../models/product';
 import {PageResponse} from '../models/page';
 import {ProductFilters} from '../models/product-filters';
+import {ConfigService} from '../../../core/core/config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ import {ProductFilters} from '../models/product-filters';
 export class ProductService {
 
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/products';
+  private readonly config = inject(ConfigService);
+
+  private get apiUrl(): string {
+    return `${this.config.apiUrl}/products`;
+  }
 
   getProducts(
     page = 0,
